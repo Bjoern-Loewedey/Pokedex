@@ -1,5 +1,5 @@
-async function fetchPokemon() {
-  let response = await fetch ("https://pokeapi.co/api/v2/pokemon?limit=20&offset=0")
+async function fetchPokemon(offset) {
+  let response = await fetch (`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`)
   let data = await response.json();
   return data.results;
 }
@@ -10,3 +10,4 @@ async function fetchPokemonDetails(url) {
   
   return data;
 }
+

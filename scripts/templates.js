@@ -22,5 +22,16 @@ function getPokemonDialogTemplate(details) {
     <p>${(details.height / 10).toLocaleString("de-DE")} Meter</p>
     <button data-id="close-dialog-button" onclick="closePokemonDialog()">Close</button>
     <button data-id="next-button" onclick="nextPokemon(${details.id})">Next</button>
+    <button data-id="prev-button" ${isPreviousDisabled(details.id)} onclick="prevPokemon(${details.id})">Previous</button>
     `;
+}
+
+
+function isPreviousDisabled(pokemonId) {
+    if (pokemonId ===1){
+        return `disabled`;
+    }
+
+    return ``;
+       
 }
