@@ -2,7 +2,7 @@ function getPokemonTemplate(details) {
     console.log(details)
     let types = "";
 
-    for (let i =0; i < details.types.length; i++) {
+    for (let i = 0; i < details.types.length; i++) {
         types += details.types[i].type.name + " ";
     }
 
@@ -18,6 +18,11 @@ function getPokemonTemplate(details) {
 
 function getPokemonDialogTemplate(details) {
     return `
+    <img data-id="dialog-image" src="${details.sprites.other["official-artwork"].front_default}" alt="${details.name}">
+    <h2 data-id="overlay-pokemon-name">${details.name}</h2>
+    <p>${getPokemonTypes(details)}</p>
+    <p>Attack: ${details.stats[1].base_stat}</p>
+    <p>Defense: ${details.stats[2].base_stat}</p>
     <p>${(details.weight / 10).toLocaleString("de-DE")} kg</p>
     <p>${(details.height / 10).toLocaleString("de-DE")} Meter</p>
     <button data-id="close-dialog-button" onclick="closePokemonDialog()">Close</button>
@@ -28,10 +33,21 @@ function getPokemonDialogTemplate(details) {
 
 
 function isPreviousDisabled(pokemonId) {
-    if (pokemonId ===1){
+    if (pokemonId === 1) {
         return `disabled`;
     }
 
     return ``;
-       
+}
+
+
+function getPokemonTypes(details) {
+    let types = "";
+
+    for (let i = 0; i < details.types.length; i++) {
+        types += details.types[i].type.name + " ";
+    }
+
+    return types;
+
 }

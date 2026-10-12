@@ -1,7 +1,7 @@
 async function fetchPokemon(offset) {
   let response = await fetch (`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${offset}`)
   let data = await response.json();
-  return data.results;
+  return data;
 }
 
 async function fetchPokemonDetails(url) {
