@@ -1,5 +1,4 @@
 function getPokemonTemplate(details) {
-    console.log(details)
     let types = "";
 
     for (let i = 0; i < details.types.length; i++) {
@@ -18,6 +17,7 @@ function getPokemonTemplate(details) {
 
 function getPokemonDialogTemplate(details) {
     return `
+    <div class="pokemon-dialog-card">
     <img data-id="dialog-image" src="${details.sprites.other["official-artwork"].front_default}" alt="${details.name}">
     <h2 data-id="overlay-pokemon-name">${details.name}</h2>
     <p>${getPokemonTypes(details)}</p>
@@ -28,6 +28,7 @@ function getPokemonDialogTemplate(details) {
     <button data-id="close-dialog-button" onclick="closePokemonDialog()">Close</button>
     <button data-id="next-button" onclick="nextPokemon(${details.id})">Next</button>
     <button data-id="prev-button" ${isPreviousDisabled(details.id)} onclick="prevPokemon(${details.id})">Previous</button>
+    </div>
     `;
 }
 

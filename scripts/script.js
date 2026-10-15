@@ -2,22 +2,23 @@ let completeDetails = [];
 let offset = 0;
 let totalPokemonCards = 0;
 
+
 async function init() {
     let pokemon = await fetchPokemon(offset);
     let pokemonList = document.querySelector("ul");
 
+    totalPokemonCards = pokemon.count;
+
     for (let i = 0; i < pokemon.results.length; i++) {
         let details = await fetchPokemonDetails(pokemon.results[i].url);
-
-        totalPokemonCards = pokemon.count;
 
         completeDetails.push(details);
 
         let template = getPokemonTemplate(details);
         pokemonList.innerHTML += template;
-        console.log(template)
     }
 }
+
 
 init();
 
@@ -33,18 +34,23 @@ async function openPokemonDialog(pokemonId) {
     disableNextButton(pokemonId);
 
     dialog.showModal();
-};
+    disableBackgroundScroll();
+}
 
 
 function closePokemonDialog() {
     let dialog = document.querySelector("dialog");
     dialog.close();
-};
+
+    enableBackgroundScroll();
+}
+
 
 function nextPokemon(pokemonId) {
     let nextPokemonId = pokemonId + 1;
     openPokemonDialog(nextPokemonId);
 }
+
 
 function prevPokemon(pokemonId) {
     let prevPokemonId = pokemonId - 1;
@@ -54,8 +60,9 @@ function prevPokemon(pokemonId) {
     }
 }
 
+
 async function loadMore() {
-    offset += 20
+    offset += 20;
     let pokemon = await fetchPokemon(offset);
     let pokemonList = document.querySelector("ul");
 
@@ -70,7 +77,6 @@ async function loadMore() {
     if (offset + pokemon.results.length >= totalPokemonCards) {
         let loadMoreButton = document.querySelector('[data-id="load-more-button"]');
         loadMoreButton.hidden = true;
-
     }
 }
 
@@ -106,5 +112,24 @@ async function getPokemonDetails(pokemonId) {
     }
 
     return details;
+}
 
+
+function closeDialogOnOutsideClick(event) {
+    let clickedElement = event.target;
+    let pokemonCard = clickedElement.closest(".pokemon-dialog-card");
+
+    if (pokemonCard === null) {
+        closePokemonDialog();
+    }
+}
+
+
+function disableBackgroundScroll() {
+    document.body.style.overflow = "hidden";
+}
+
+
+function enableBackgroundScroll() {
+    document.body.style.overflow = "";
 }

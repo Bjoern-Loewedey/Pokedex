@@ -22,7 +22,7 @@
         <h1>Pokedex</h1>
 
         <input data-id="search-input" type="text" placeholder="Search Pokemon">
-        <button data-id="search-button">Search</button>
+        <button data-id="search-button" onclick="searchPokemon()">Search</button>
 
     </header>
 
@@ -32,19 +32,19 @@
         <button data-id="load-more-button" onclick="loadMore()">Load more</button>
 
     </main>
-    
-    <dialog data-id="dialog">
-        <div data-id="overlay-pokemon-name"></div>
 
-        <img data-id="dialog-image" src=""  alt="Pokemon">
+    <dialog data-id="dialog" onclick="closeDialogOnOutsideClick(event)"></dialog>
+    <div data-id="overlay-pokemon-name"></div>
 
-        <button data-id="close-dialog-button">Close</button>
+    <img data-id="dialog-image" src="" alt="Pokemon">
 
-        <button data-id="prev-button">Previous</button>
-        <button data-id="next-button">Next</button>
+    <button data-id="close-dialog-button">Close</button>
 
-    </dialog>   
-  
+    <button data-id="prev-button">Previous</button>
+    <button data-id="next-button">Next</button>
+
+    </dialog>
+
 
 
 </body>
