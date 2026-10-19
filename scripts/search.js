@@ -11,8 +11,7 @@ async function searchPokemon() {
     let notFound = document.querySelector('[data-id="not-found"]');
     notFound.innerHTML = "";
 
-    let allPokemon = await fetchAllPokemon();
-    let filteredPokemon = filterPokemon(allPokemon, searchValue);
+    let filteredPokemon = filterPokemon(allPokemons, searchValue);
 
     if (filteredPokemon.length === 0) {
         showNoSearchResults();

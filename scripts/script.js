@@ -1,16 +1,25 @@
 let completeDetails = [];
 let offset = 0;
 let totalPokemonCards = 0;
+let pokemonList;
+let allPokemons = [];
 
 
 async function init() {
-    let pokemon = await fetchPokemon(offset);
-    let pokemonList = document.querySelector("ul");
+    allPokemons = await fetchAllPokemon();
+    pokemonList = document.querySelector("ul");
 
-    totalPokemonCards = pokemon.count;
+    totalPokemonCards = allPokemons.length;
 
-    for (let i = 0; i < pokemon.results.length; i++) {
-        let details = await fetchPokemonDetails(pokemon.results[i].url);
+    await loadAndRenderPokemonDetails();
+}
+
+
+init();
+
+async function loadAndRenderPokemonDetails() {
+    for (let i = offset; i < offset + 20 && i < allPokemons.length; i++) {
+        let details = await fetchPokemonDetails(allPokemons[i].url);
 
         completeDetails.push(details);
 
@@ -18,9 +27,6 @@ async function init() {
         pokemonList.innerHTML += template;
     }
 }
-
-
-init();
 
 
 async function openPokemonDialog(pokemonId) {
@@ -63,31 +69,11 @@ function prevPokemon(pokemonId) {
 
 async function loadMore() {
     offset += 20;
-    let pokemon = await fetchPokemon(offset);
-    let pokemonList = document.querySelector("ul");
+    await loadAndRenderPokemonDetails();
 
-    for (let i = 0; i < pokemon.results.length; i++) {
-        let details = await fetchPokemonDetails(pokemon.results[i].url);
-        completeDetails.push(details);
-
-        let template = getPokemonTemplate(details);
-        pokemonList.innerHTML += template;
-    }
-
-    if (offset + pokemon.results.length >= totalPokemonCards) {
+    if (offset + 20 >= totalPokemonCards) {
         let loadMoreButton = document.querySelector('[data-id="load-more-button"]');
         loadMoreButton.hidden = true;
-    }
-}
-
-
-async function loadNextPokemonBatch() {
-    offset += 20;
-    let pokemon = await fetchPokemon(offset);
-
-    for (let i = 0; i < pokemon.results.length; i++) {
-        let details = await fetchPokemonDetails(pokemon.results[i].url);
-        completeDetails.push(details);
     }
 }
 
@@ -107,8 +93,11 @@ async function getPokemonDetails(pokemonId) {
     let details = completeDetails.find(pokemon => pokemon.id === pokemonId);
 
     if (details === undefined) {
-        await loadNextPokemonBatch();
-        details = completeDetails.find(pokemon => pokemon.id === pokemonId);
+        let pokemon = allPokemons.find(pokemon => {
+            return pokemon.url.endsWith(`/${pokemonId}/`);
+        });
+
+        details = await fetchPokemonDetails(pokemon.url);
     }
 
     return details;
