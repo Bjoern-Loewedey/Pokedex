@@ -37,3 +37,15 @@ function showNoSearchResults() {
     let notFound = document.querySelector('[data-id="not-found"]');
     notFound.innerHTML = "No Pokemon found.";
 }
+
+
+async function showSearchResults(filteredPokemon) {
+    let pokemonList = document.querySelector('[data-id="pokemon-list"]');
+    pokemonList.innerHTML = "";
+
+    for (let i = 0; i < filteredPokemon.length; i++) {
+        let details = await fetchPokemonDetails(filteredPokemon[i].url);
+        let template = getPokemonTemplate(details);
+        pokemonList.innerHTML += template;
+    }
+}
