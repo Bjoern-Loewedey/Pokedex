@@ -7,15 +7,16 @@ let allPokemons = [];
 
 async function init() {
     allPokemons = await fetchAllPokemon();
-    pokemonList = document.querySelector("ul");
+    pokemonList = document.querySelector('[data-id="pokemon-list"]');
+
+    let dialog = document.querySelector('[data-id="dialog"]');
+    dialog.addEventListener("close", enableBackgroundScroll);
 
     totalPokemonCards = allPokemons.length;
 
     await loadAndRenderPokemonDetails();
 }
 
-
-init();
 
 async function loadAndRenderPokemonDetails() {
     for (let i = offset; i < offset + 20 && i < allPokemons.length; i++) {
@@ -79,11 +80,10 @@ async function loadMore() {
 
 
 function disableNextButton(pokemonId) {
-    let lastPokemonId = completeDetails[completeDetails.length - 1].id;
     let nextButton = document.querySelector('[data-id="next-button"]');
+    let lastPokemon = allPokemons[allPokemons.length - 1];
 
-    if (completeDetails.length >= totalPokemonCards &&
-        pokemonId === lastPokemonId) {
+    if (lastPokemon.url.endsWith(`/${pokemonId}/`)) {
         nextButton.disabled = true;
     }
 }

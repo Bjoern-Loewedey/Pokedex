@@ -1,19 +1,14 @@
 function getPokemonTemplate(details) {
-    let types = "";
-
-    for (let i = 0; i < details.types.length; i++) {
-        types += details.types[i].type.name + " ";
-    }
-
     return `
     <li data-pokemon-id="${details.id}" onclick="openPokemonDialog(${details.id})">
     ${details.name}
     <img src=${details.sprites.front_default}>
-    <p>${types}</p>
+    <p>${getPokemonTypes(details)}</p>
     <p>${details.id}</p>
     </li>
     `;
 }
+
 
 function getPokemonDialogTemplate(details) {
     return `
@@ -41,7 +36,6 @@ function isPreviousDisabled(pokemonId) {
     return ``;
 }
 
-
 function getPokemonTypes(details) {
     let types = "";
 
@@ -50,5 +44,4 @@ function getPokemonTypes(details) {
     }
 
     return types;
-
 }

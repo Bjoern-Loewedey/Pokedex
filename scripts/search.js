@@ -1,18 +1,70 @@
-async function searchPokemon() {
+function searchPokemon() {
     let searchInput = document.querySelector('[data-id="search-input"]');
     let searchValue = searchInput.value;
+    let notFound = document.querySelector('[data-id="not-found"]');
 
-    if (searchValue.length < 3) {
-        let notFound = document.querySelector('[data-id="not-found"]');
-        notFound.innerHTML = "Please enter at least 3 characters.";
+    if (!checkSearchLength(searchValue, notFound)) {
         return;
     }
 
-    let notFound = document.querySelector('[data-id="not-found"]');
     notFound.innerHTML = "";
+
+    hideLoadMoreButton();
 
     let filteredPokemon = filterPokemon(allPokemons, searchValue);
 
+    handleSearchResults(filteredPokemon);
+}
+
+
+function hideLoadMoreButton() {
+    let loadMoreButton = document.querySelector('[data-id="load-more-button"]');
+    loadMoreButton.hidden = true;
+}
+
+
+function showLoadMoreButton() {
+    let loadMoreButton = document.querySelector('[data-id="load-more-button"]');
+    loadMoreButton.hidden = false;
+}
+
+
+function resetSearch() {
+    let pokemonList = document.querySelector('[data-id="pokemon-list"]');
+    pokemonList.innerHTML = "";
+
+    for (let i = 0; i < completeDetails.length; i++) {
+        pokemonList.innerHTML += getPokemonTemplate(completeDetails[i]);
+    }
+
+    showLoadMoreButton();
+}
+
+
+function checkSearchLength(searchValue, notFound) {
+    if (searchValue.length === 0) {
+        notFound.innerHTML = "";
+        resetSearch();
+        return false;
+    }
+
+    if (searchValue.length < 3) {
+        notFound.innerHTML = "Please enter at least 3 characters.";
+        return false;
+    }
+
+    return true;
+}
+
+
+function searchOnEnter(event) {
+    if (event.key === "Enter") {
+        searchPokemon();
+    }
+}
+
+
+function handleSearchResults(filteredPokemon) {
     if (filteredPokemon.length === 0) {
         showNoSearchResults();
         return;
@@ -20,7 +72,6 @@ async function searchPokemon() {
 
     showSearchResults(filteredPokemon);
 }
-
 
 
 function filterPokemon(allPokemon, searchValue) {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -17,24 +17,22 @@
     <script src="./scripts/script.js" defer></script>
 </head>
 
-<body>
+<body onload="init()">
     <header>
         <h1>Pokedex</h1>
 
-        <input data-id="search-input" type="text" placeholder="Search Pokemon">
-        <button data-id="search-button" onclick="searchPokemon()">Search</button>
+        <input data-id="search-input" type="text" placeholder="Search Pokemon" onkeydown="searchOnEnter(event)">
 
+        <button data-id="search-button" onclick="searchPokemon()">Search</button>
     </header>
 
     <main data-id="content">
         <p data-id="not-found"></p>
         <ul data-id="pokemon-list"></ul>
         <button data-id="load-more-button" onclick="loadMore()">Load more</button>
-
     </main>
 
     <dialog data-id="dialog" onclick="closeDialogOnOutsideClick(event)"></dialog>
-
 </body>
 
 </html>
