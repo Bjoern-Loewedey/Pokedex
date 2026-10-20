@@ -1,0 +1,322 @@
+/* ==================== HEADER ==================== */
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, #2A75BB, #6A5ACD);
+    color: white;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+
+.search-container {
+    display: flex;
+    gap: 0.5rem;
+}
+
+
+.search-container input {
+    padding: 0.6rem 0.8rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+}
+
+
+.search-container button {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #ffcb05;
+    color: #2a2a2a;
+}
+
+
+.search-container button:hover {
+    background-color: #e6b800;
+}
+
+
+/* ==================== MAIN ==================== */
+
+main {
+    padding: 1.5rem;
+}
+
+
+[data-id="pokemon-list"] {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 16rem);
+    justify-content: center;
+    gap: 1rem;
+    padding: 0;
+    list-style: none;
+}
+
+
+[data-id="load-more-button"] {
+    display: block;
+    margin: 1.5rem auto 0;
+    padding: 0.7rem 1.2rem;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: #2A75BB;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+
+[data-id="load-more-button"]:hover {
+    background-color: #225f98;
+}
+
+
+/* ==================== POKEMON CARDS ==================== */
+
+[data-id="pokemon-list"] li {
+    padding: 1rem;
+    border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 0.3rem 0.8rem rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+}
+
+
+[data-id="pokemon-list"] li img {
+    width: 8rem;
+    height: 8rem;
+    object-fit: contain;
+}
+
+
+.pokemon-name {
+    margin: 0 0 0.5rem;
+    font-size: 1.2rem;
+    text-transform: capitalize;
+}
+
+
+.pokemon-types {
+    margin: 0.5rem 0;
+    font-weight: 600;
+}
+
+
+.grass {
+    background-color: #b7e4a8;
+}
+
+
+.fire {
+    background-color: #f6b27a;
+}
+
+
+.water {
+    background-color: #a9c9f5;
+}
+
+
+.bug {
+    background-color: #d2dd8b;
+}
+
+
+.normal {
+    background-color: #ddd7c7;
+}
+
+
+.poison {
+    background-color: #d4a6dc;
+}
+
+
+.electric {
+    background-color: #ffe58a;
+}
+
+
+.ground {
+    background-color: #e8cf9a;
+}
+
+
+.fairy {
+    background-color: #f4c1d0;
+}
+
+
+.fighting {
+    background-color: #e49a91;
+}
+
+
+.psychic {
+    background-color: #f5a4bd;
+}
+
+
+.rock {
+    background-color: #d8c985;
+}
+
+
+.ghost {
+    background-color: #b8a1cc;
+}
+
+
+.ice {
+    background-color: #bdebf0;
+}
+
+
+.dragon {
+    background-color: #b6a6ef;
+}
+
+
+.dark {
+    background-color: #a9968d;
+}
+
+
+.steel {
+    background-color: #ced3dc;
+}
+
+
+.flying {
+    background-color: #c5b9ef;
+}
+
+
+.type-badge.normal {
+    background-color: #9fa19f;
+}
+
+
+.type-badge.fighting {
+    background-color: #ff8000;
+}
+
+
+.type-badge.flying {
+    background-color: #81b9ef;
+}
+
+
+.type-badge.poison {
+    background-color: #9141cb;
+}
+
+
+.type-badge.ground {
+    background-color: #915121;
+}
+
+
+.type-badge.rock {
+    background-color: #afa981;
+}
+
+
+.type-badge.bug {
+    background-color: #91a119;
+}
+
+
+.type-badge.ghost {
+    background-color: #704170;
+}
+
+
+.type-badge.steel {
+    background-color: #60a1b8;
+}
+
+
+.type-badge.fire {
+    background-color: #e62829;
+}
+
+
+.type-badge.water {
+    background-color: #2980ef;
+}
+
+
+.type-badge.grass {
+    background-color: #3fa129;
+}
+
+
+.type-badge.electric {
+    background-color: #fac000;
+    color: #2a2a2a;
+}
+
+
+.type-badge.psychic {
+    background-color: #ef4179;
+}
+
+
+.type-badge.ice {
+    background-color: #3dcef3;
+    color: #2a2a2a;
+}
+
+
+.type-badge.dragon {
+    background-color: #5060e1;
+}
+
+
+.type-badge.dark {
+    background-color: #624d4e;
+}
+
+
+.type-badge.fairy {
+    background-color: #ef70ef;
+}
+
+
+.pokemon-card {
+    border: 0.25rem solid white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+.pokemon-card:hover {
+    transform: translateY(-0.3rem) scale(1.03);
+    box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.25);
+}
+
+
+.type-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    margin: 0.2rem;
+    border-radius: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: white;
+    border: 0.20rem solid white;
+}
+
+/* ==================== DIALOG ==================== */
+
+
+/* ==================== FOOTER ==================== */

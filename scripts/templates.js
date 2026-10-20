@@ -1,11 +1,10 @@
 function getPokemonTemplate(details) {
     return `
-    <li data-pokemon-id="${details.id}" onclick="openPokemonDialog(${details.id})">
-    ${details.name}
-    <img src=${details.sprites.front_default}>
-    <p>${getPokemonTypes(details)}</p>
-    <p>${details.id}</p>
-    </li>
+<li class="pokemon-card ${details.types[0].type.name}" data-pokemon-id="${details.id}" onclick="openPokemonDialog(${details.id})">
+    <h3 class="pokemon-name">#${details.id} ${details.name}</h3>
+    <img class="pokemon-image" src="${details.sprites.other["official-artwork"].front_default}" alt="${details.name}">
+    <p class="pokemon-types">${getPokemonTypes(details)}</p>
+</li>
     `;
 }
 
@@ -40,7 +39,9 @@ function getPokemonTypes(details) {
     let types = "";
 
     for (let i = 0; i < details.types.length; i++) {
-        types += details.types[i].type.name + " ";
+        types += `<span class="type-badge ${details.types[i].type.name}">
+            ${details.types[i].type.name}
+          </span>`;
     }
 
     return types;
